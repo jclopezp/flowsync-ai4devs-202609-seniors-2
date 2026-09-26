@@ -1,6 +1,6 @@
 # AGENTS.md
 
-**Versión 1.1.0 · 2026-09-26**
+**Versión 1.2.0 · 2026-09-26**
 
 Fuente única de instrucciones para cualquier agente de código que trabaje en este repositorio
 (Claude Code, Codex, Cursor, etc.). `CLAUDE.md` solo redirige aquí: todo cambio se hace en este
@@ -146,3 +146,51 @@ los reinterpretes ni los des por hechos. Dos cosas que afectan a cómo trabajas 
 
 MCP de Atlassian configurado en `.mcp.json` (el proyecto Jira del ejercicio es `FLOW` / FlowSync en
 cathedral-cloud.atlassian.net).
+
+
+## Reglas de proceso
+
+Cómo se trabaja aquí. Lo de arriba describe el repo; esto describe el turno.
+
+### El ciclo
+
+1. **Ticket.** `/priority-ticket` coge el siguiente del tablero FLOW y entrega un plan.
+2. **Aprobación.** El plan no se aplica hasta que el usuario dice que sí. Es un punto de parada
+   real, no una fórmula de cortesía: si no hay respuesta, no se implementa.
+3. **Implementación.** Solo lo que cubre el ticket.
+4. **Revisión.** El subagente `adversarial-reviewer` lee el diff antes de dar nada por terminado.
+5. **Cierre.** `/commit`. No uses `git commit` a mano: la skill verifica antes de commitear y el
+   comando pelado no.
+
+Si el usuario entra por el medio del ciclo ("arregla esto", "añade aquello"), no le hagas empezar
+por el paso 1. Pero los pasos 4 y 5 siguen valiendo igual.
+
+### Dónde se pregunta en vez de decidir
+
+Para y pregunta antes de:
+
+- Cambiar el esquema de la base de datos. Implica migración, y la migración regenera
+  `database/schema.ts`.
+- Añadir una dependencia. Ni al backend ni al frontend sin decirlo.
+- Cambiar el contrato de un endpoint que ya existe: ruta, forma de la respuesta, códigos de error.
+- Hacer algo que el ticket no cubre. Si te lo encuentras a medias, termina lo que sí cubre,
+  dilo, y deja lo otro fuera.
+
+No preguntes por lo que ya está decidido en este archivo. Si la convención está escrita arriba,
+aplícala.
+
+### Lo que no se hace
+
+- **No edites archivos generados**: `backend/.adonisjs/**` ni `backend/database/schema.ts`. El
+  cambio va en la migración o en el código fuente que los genera.
+- **No commitees en `main` ni en `s1/start`.** Crea rama antes.
+- **No hagas push ni abras un pull request** por iniciativa propia. En este repo los PR van contra
+  el repositorio del curso.
+- **No amplíes el alcance.** Refactor oportunista, renombrados de paso y "ya que estaba aquí" van
+  en otro ticket.
+
+### Del ejercicio
+
+Cada prompt que se lanza se anota en `prompts.md`, literal, con su modelo y su herramienta,
+incluidos los que no funcionaron. Si el usuario está trabajando el ejercicio y no lo ha anotado,
+recuérdaselo al cerrar el turno.
