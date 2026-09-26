@@ -24,3 +24,6 @@ coverage/
 .DS_Store
 .vscode/
 .idea/
+
+# Claude Code (el harness se commitea; los overrides personales no)
+.claude/settings.local.json

@@ -22,14 +22,38 @@ Borra el ejemplo de abajo cuando escribas el primero.
 
 ## Prompt 1
 
-**Modelo:** Opus 1M xHigh
+**Modelo:** Opus 5 1M xHigh
 **Herramienta:** Claude Code
 
 ```
-Este es el ejemplo. Bórralo.
+/init
 
-El prompt va aquí dentro, entero y con sus saltos de línea,
-para que se sepa dónde empieza y dónde acaba.
 ```
 
-**Qué salió:** (opcional, una línea) funcionó a la primera / tuve que insistir / me inventó una ruta que no existe.
+**Qué salió:** 
+ We're setting up your agent harness for the FlowSync exercise; I just wrote CLAUDE.md covering commands, backend architecture, and the exercise deliverables. Next: review it, then decide whether to import your Codex config via /import.
+
+## Prompt 2
+
+crea el archivo AGENTS.md, y copia el contenido de CLAUDE.md a AGENTS.md. Cada vez que el sistema lea CLAUDE.md debe ser redreccionado a AGENTS.md
+
+**Qué salió:** 
+Se ejecuto correctamente, sin embargo el redirect es solo texto explicativo, y no agrego el import @AGENTS.md
+- AGENTS.md — todo el contenido que estaba en CLAUDE.md (comandos, arquitectura de backend/frontend, el ejercicio). Solo cambié la cabecera: ahora se presenta como la fuente única para cualquier agente, no solo Claude Code.
+- CLAUDE.md — reducido a un redirect de 9 líneas que apunta a AGENTS.md y dice explícitamente que no duplica contenido y que las instrucciones nuevas van allí.
+
+Una nota sobre cómo funciona la redirección en la práctica: Claude Code carga CLAUDE.md automáticamente al arrancar, y AGENTS.md también lo lee de forma nativa, así que en la práctica el contenido entra igual. Lo que hace el puntero es garantizar el caso en que un agente solo mire CLAUDE.md: se encuentra la instrucción de leer AGENTS.md y el enlace. No existe un mecanismo de "redirección" real a nivel de harness — es una instrucción, y como tal el agente puede ignorarla; eso es precisamente el tipo de cosa que te interesa anotar en la Parte B del ejercicio ("algo que dejaste escrito en el harness y que el agente no cumplió igualmente").
+
+## Prompt 3
+Despues de haber modificado CLAUDE.md revisa el archivo, agregue "@AGENTS.md", a fin de que fuerze a leer AGENTS.md y no sea ignorado.
+  Podias haberlos agregado antes?
+
+  **Qué salió:** 
+  Si reconocio que no hizo lo correcto y modifico la prosa de CLAUDE.md
+
+## Prompt 3
+en el harness, se debe incluir: un procesos de comprobación: algo que se dispare solo cuando el agente termina de editar (formatear, pasar el linter, correr los tests), o un revisor al que le encargues leer con lupa lo que se acaba de escribir.
+
+**Qué salió:** 
+Agrego un hook y un revisor
+
