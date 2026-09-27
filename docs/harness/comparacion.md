@@ -5,10 +5,13 @@
 | Ticket | [FLOW-1](https://cathedral-cloud.atlassian.net/browse/FLOW-1) · Implementar login en el frontend |
 | Fecha | 2026-09-26 |
 | Modelo | Opus 5, esfuerzo alto · Claude Code |
-| Con harness | `/priority-ticket FLOW-1` → [`plan-con-harness.md`](./plan-con-harness.md) |
-| Sin harness | misma instrucción a mano → [`plan-FLOW-sinHarness.md`](./plan-FLOW-sinHarness.md) |
+| Con harness | `/priority-ticket FLOW-1` → plan en `plan-con-harness.md` |
+| Sin harness | misma instrucción a mano → plan en `plan-FLOW-sinHarness.md` |
 
 Ninguno de los dos planes se aplicó. Se comparan los planes, no el código.
+
+Los dos archivos de plan no se entregan: la entrega son este documento y `prompts.md`, y nada más.
+Lo relevante de cada plan está citado aquí dentro.
 
 ---
 
